@@ -16,7 +16,7 @@ int main()
 	//	log.Close();
 	//}
 
-	CreateSaveDir();
+	LOG::CreateSaveDir();
 	LOG log("C:/Users/mssevov18/Documents/Logs/logs.log", true);
 	if (log.Is_Open())
 	{

@@ -5,9 +5,9 @@
 #include <string>
 #include <ctime>
 
-void CreateSaveDir();
-
 std::string AddLeadingZeroes(int num);
+
+tm getTimeStamp();
 
 std::string TmToDateString(tm tm, char delimiter = '-');
 
@@ -37,27 +37,28 @@ class LOG
 {
 public:
 	LOG(bool ornamental = false);
-	LOG(std::string path, bool ornamental = false);
+	LOG(const std::string& path, bool ornamental = false);
+
+	static void CreateSaveDir();
 
 private:
-	tm			  timeStamp; //Log's time stamp
-	enum SEVERITY severity; //Log's severity
-	std::string   message; //Log's message
+	tm            timeStamp; //Log's time stamp
+	enum SEVERITY severity;  //Log's severity
+	std::string   message;   //Log's message
 	
-	bool		 ornamental;
+	bool         ornamental;
 	std::fstream logFstream;
 
 public:
 	void PrintLog();
-	void Log(SEVERITY severity, std::string message);
+	void Log(SEVERITY severity, const std::string& message);
 
 	std::string LogToString(char delimiter = ' ');
 
 	void operator()(SEVERITY severity, std::string message);
 
-
 	void Close();
-	bool Open(std::string path);
+	bool Open(const std::string& path = "");
 	bool Is_Open();
-	void SaveLog();
+
 };
